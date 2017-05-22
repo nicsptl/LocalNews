@@ -1,5 +1,6 @@
-angular.module('flapperNews', ['ui.router'])
-    .config([
+var app = angular.module('flapperNews', ['ui.router']);
+
+    app.config([
         '$stateProvider',
         '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
@@ -19,16 +20,25 @@ angular.module('flapperNews', ['ui.router'])
 
 
             $urlRouterProvider.otherwise('home');
-        }])
-    .factory('posts',[function(){
-var o = {
+    }]);
+
+
+
+
+
+    app.factory('posts',[function(){
+    var o = {
     posts: []
     }
     return o;
-}]).controller('MainCtrl', [
+    }]);
+
+
+
+
+    app.controller('MainCtrl', [
     '$scope','posts',
     function($scope,posts){
-        $scope.test = 'Hello world Neeva!';
 
         $scope.posts = posts.posts;
         $scope.addPost = function(){
@@ -50,15 +60,18 @@ var o = {
         $scope.incrementUpvotes = function(post){
             post.upvotes +=1;
         }
-    }])
-    .controller('PostsCtrl', [
+    }]);
+
+
+
+
+    app.controller('PostsCtrl', [
         '$scope',
         '$stateParams',
         'posts',
         function($scope, $stateParams, posts){
             $scope.post = posts.posts[$stateParams.id];
-
-        }]);
+    }]);
 
 
 /**
